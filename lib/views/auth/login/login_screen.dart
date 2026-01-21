@@ -133,13 +133,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           .login(
                             _emailController.text.trim(),
                             _passwordController.text.trim(),
-                          )
-                          .then((value) {
-                            CustomNavigator.pushReplace(
-                              context,
-                              RouteNames.navBraScreen,
-                            );
-                          });
+                            context,
+                          );
                     },
                     text: "Sign In",
                   ),

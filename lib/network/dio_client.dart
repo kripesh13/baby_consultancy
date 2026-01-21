@@ -21,7 +21,7 @@ class DioClient {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          // 🔐 Skip token for login
+    
           if (!options.path.contains('/auth/student/authenticate')) {
             final token = await storage.read(key: StorageKeys.token);
 
@@ -30,9 +30,8 @@ class DioClient {
             }
           }
 
-          // ✅ Example: you can add any extra header dynamically here
-          options.headers['X-App-Version'] = '1.0.0';
-          options.headers['X-Platform'] = 'Flutter';
+          // options.headers['X-App-Version'] = '1.0.0';
+          // options.headers['X-Platform'] = 'Flutter';
 
           print('➡️ REQUEST [${options.method}] => ${options.uri}');
           print('Headers: ${options.headers}');
