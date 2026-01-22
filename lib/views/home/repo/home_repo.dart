@@ -13,17 +13,21 @@ class HomeRepo {
   
     final ApiService _apiService = ApiService();
 
+Future<UniversityModel> getUniversity({
+  int page = 0,
+  int limit = 10,
+}) async {
+  try {
+    final response = await _apiService.get(
+      "${Endpoints.university}&page=$page&limit=$limit",
+    );
 
- Future<UniversityModel> getUniversity()async{
-    try {
-      var response = await _apiService.get(Endpoints.university);
-  
-   return UniversityModel.fromJson(response.data);
-
-    } catch (e) {
-      rethrow;
-    }
+    return UniversityModel.fromJson(response.data);
+  } catch (e) {
+    rethrow;
   }
+}
+
  
 
 
