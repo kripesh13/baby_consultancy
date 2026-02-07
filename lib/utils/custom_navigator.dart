@@ -13,7 +13,7 @@ class CustomNavigator {
   }
 
   static void pushReplace(BuildContext context, String name, {Object? extra}) {
-    if (!context.mounted) return;
+    // if (!context.mounted) return;
     context.pushReplacement(name, extra: extra);
   }
 

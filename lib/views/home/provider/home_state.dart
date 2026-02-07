@@ -1,3 +1,4 @@
+import 'package:baby_eduction/utils/bot_toast.dart';
 import 'package:baby_eduction/views/home/model/university_model.dart';
 import 'package:baby_eduction/views/home/repo/home_repo.dart';
 import 'package:flutter/material.dart';
@@ -20,19 +21,21 @@ class HomeState extends ChangeNotifier {
   UniversityModel? universityModel;
   Future<void> getUniversity() async {
     try {
-      isLoading = true;
-      errorMessage = null;
-      notifyListeners();
+      // isLoading = true;
+      // errorMessage = null;
+      // notifyListeners();
+      loading(visible: true);
 
-      // TODO: API call here
       final response = await ref.read(homeRepo).getUniversity();
       universityModel = response;
       notifyListeners();
-    } catch (e) {
+    } catch (e, s) {
+      loading(visible: false);
+      print(s);
+      print(e);
       errorMessage = e.toString();
     } finally {
-      isLoading = false;
-      notifyListeners();
+      loading(visible: false);
     }
   }
 }

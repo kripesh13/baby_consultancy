@@ -1,5 +1,9 @@
+import 'package:baby_eduction/views/auth/login/change_password/change_password_screen.dart';
 import 'package:baby_eduction/views/auth/login/login_screen.dart';
 import 'package:baby_eduction/views/document/add_document_screen.dart';
+import 'package:baby_eduction/views/document/document_status.dart';
+import 'package:baby_eduction/views/document/secure_document_page.dart';
+import 'package:baby_eduction/views/document/student_documents_page.dart';
 import 'package:baby_eduction/views/nav_bar/nav_bar_screen.dart';
 import 'package:baby_eduction/views/splash/splash_screen.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -58,6 +62,23 @@ class AppRouter {
         path: RouteNames.documentUploadScreen,
         pageBuilder: (context, state) => CustomTransitionPage(
           child: DocumentUploadScreen(),
+          transitionsBuilder: transitionsBuilder,
+        ),
+      ),
+
+      GoRoute(
+        path: RouteNames.documentStatusScreen,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          child: DocumentStatusScreen(),
+          transitionsBuilder: transitionsBuilder,
+        ),
+      ),
+
+      // secureDocumentPage
+      GoRoute(
+        path: RouteNames.changePassword,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          child: ChangePasswordScreen(),
           transitionsBuilder: transitionsBuilder,
         ),
       ),

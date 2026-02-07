@@ -11,5 +11,5 @@ final apiServiceProvider = Provider<ApiService>((ref) {
 final authProvider =
     StateNotifierProvider<AuthNotifier, AuthState>((ref) {
   final apiService = ref.read(apiServiceProvider);
-  return AuthNotifier(apiService);
+  return AuthNotifier(apiService,ref);
 });

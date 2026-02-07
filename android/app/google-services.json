@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "340913629626",
+    "project_id": "babyeducation-bb3fc",
+    "storage_bucket": "babyeducation-bb3fc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340913629626:android:bc50c4efe59bd25fab1583",
+        "android_client_info": {
+          "package_name": "com.example.baby_eduction"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDek-nsfgxLdLPuqtURcE0HvIMEYcpKKis"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

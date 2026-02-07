@@ -100,7 +100,7 @@ void _showDocumentMenu(BuildContext context) {
         value: 1,
         padding: EdgeInsets.zero,
         onTap: () {
-          CustomNavigator.push(context, RouteNames.documentUploadScreen);
+          CustomNavigator.push(context, RouteNames.documentStatusScreen);
         },
         child: _menuItem(
           icon: Icons.fact_check_outlined,

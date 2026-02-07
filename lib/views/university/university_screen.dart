@@ -1,39 +1,53 @@
 import 'package:baby_eduction/const/app_fonts.dart';
 import 'package:baby_eduction/const/color_schemas.dart';
+import 'package:baby_eduction/views/home/model/university_model.dart';
+import 'package:baby_eduction/views/home/provider/home_state.dart';
 import 'package:baby_eduction/widget/app_bar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:baby_eduction/const/design_constant.dart'; // Assuming your font styles are here
+import 'package:baby_eduction/const/design_constant.dart';
 
-class UniversityScreen extends StatelessWidget {
+class UniversityScreen extends ConsumerWidget {
   const UniversityScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(homeStateProvider);
+
     return Scaffold(
-      // backgroundColor: Colors.grey[100],
       body: SafeArea(
         child: SingleChildScrollView(
-          // Makes the whole screen scrollable
           physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppBarWidget(),
               SizedBox(height: 20.h),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
-                  "B. A In Anthropology",
-                  style: kkBoldTextStyle().copyWith(
-                    // color: const Color(0xFF1B4F72),
-                  ),
-                ),
-              ),
-              heightBox(10),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: const UniversityCard(),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: state.universityModel?.data?.length ?? 0,
+
+                itemBuilder: (context, index) {
+                  final data = state.universityModel?.data?[index];
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          data?.programName ?? "",
+                          style: kkBoldTextStyle().copyWith(),
+                        ),
+                      ),
+                      heightBox(10),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: UniversityCard(data: data),
+                      ),
+                    ],
+                  );
+                },
               ),
 
               SizedBox(height: 20.h),
@@ -46,11 +60,15 @@ class UniversityScreen extends StatelessWidget {
 }
 
 class UniversityCard extends StatelessWidget {
-  const UniversityCard({super.key});
+  final UniversityData? data;
+
+  const UniversityCard({super.key, this.data});
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [_TopBannerCard(), heightBox(16), _DetailsCard()]);
+    return Column(
+      children: [_TopBannerCard(), heightBox(16), _DetailsCard(data!)],
+    );
   }
 }
 
@@ -94,7 +112,9 @@ class _TopBannerCard extends StatelessWidget {
 /// DETAILS CARD
 /// ------------------------------
 class _DetailsCard extends StatelessWidget {
-  const _DetailsCard();
+  final UniversityData data;
+
+  const _DetailsCard(this.data);
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +132,7 @@ class _DetailsCard extends StatelessWidget {
           ),
         ],
       ),
-      child: const _DetailsSection(),
+      child: _DetailsSection(data),
     );
   }
 }
@@ -121,19 +141,21 @@ class _DetailsCard extends StatelessWidget {
 /// DETAILS CONTENT
 /// ------------------------------
 class _DetailsSection extends StatelessWidget {
-  const _DetailsSection();
+  final UniversityData data;
+
+  const _DetailsSection(this.data);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _infoRow(Icons.school_outlined, data.universityName ?? ""),
         _infoRow(
-          Icons.school_outlined,
-          "State University of New York Oswego (SUNY Oswego) (Oswego, New York)",
+          Icons.public_outlined,
+          data.country ?? "United State Of America",
         ),
-        _infoRow(Icons.public_outlined, "United State Of America"),
-        _infoRow(Icons.timer_outlined, "Duration: 48 Months"),
+        _infoRow(Icons.timer_outlined, "Duration: ${data.duration ?? ""}"),
         SizedBox(height: 20.h),
         Text(
           "Admission Requirement",
@@ -141,22 +163,22 @@ class _DetailsSection extends StatelessWidget {
         ),
         SizedBox(height: 12.h),
         _scoreTile(
-          "GPA: 2.5     ITEP Score: 4.0",
+          "ITEP Score: ${data.pteScore ?? ""}",
           const Color(0xFFF9E7ED),
           const Color(0xFFA91D54),
         ),
         _scoreTile(
-          "IELTS Score (6)",
+          "IELTS Score ${data.ieltsScore ?? ""}",
           const Color(0xFFE8EFFF),
           const Color(0xFF1E67ED),
         ),
         _scoreTile(
-          "PTE Score (55)",
+          "PTE Score ${data.pteScore ?? ""}",
           const Color(0xFFE6F4EA),
           const Color(0xFF00A348),
         ),
         _scoreTile(
-          "TOEFL Score",
+          "TOEFL Score ${data.toeflScore ?? ""}",
           const Color(0xFFE1F5FE),
           const Color(0xFF0091FF),
         ),

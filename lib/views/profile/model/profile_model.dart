@@ -1,23 +1,25 @@
 class ProfileModel {
   num? httpStatus;
   dynamic message;
-  Data? data;
+  ProfileData? data;
   num? pageSize;
   num? totalItems;
-  ProfileModel({
-    this.httpStatus,
-    this.message,
-    this.data,
-    this.pageSize,
-    this.totalItems,
-  });
+
+  ProfileModel(
+      {this.httpStatus,
+      this.message,
+      this.data,
+      this.pageSize,
+      this.totalItems});
+
   ProfileModel.fromJson(Map<String, dynamic> json) {
     httpStatus = json['httpStatus'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? new ProfileData.fromJson(json['data']) : null;
     pageSize = json['pageSize'];
     totalItems = json['totalItems'];
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['httpStatus'] = this.httpStatus;
@@ -31,11 +33,11 @@ class ProfileModel {
   }
 }
 
-class Data {
+class ProfileData {
   num? id;
   String? userType;
   String? entityStatus;
-  List? createdDate;
+  List ? createdDate;
   dynamic updatedDate;
   PersonalDetail? personalDetail;
   List<AcademicDetails>? academicDetails;
@@ -43,36 +45,37 @@ class Data {
   List<TestDetails>? testDetails;
   File? file;
   List<Passport>? passport;
-  List<Null>? resume;
+  // List resume;
   dynamic test;
   List<TenMarksheet>? tenMarksheet;
   List<TwelveMarksheet>? twelveMarksheet;
-  List<Null>? underGraduate;
+  // List underGraduate;
   List<PostGraduate>? postGraduate;
-  Data({
-    this.id,
-    this.userType,
-    this.entityStatus,
-    this.createdDate,
-    this.updatedDate,
-    this.personalDetail,
-    this.academicDetails,
-    this.workExperience,
-    this.testDetails,
-    this.file,
-    this.passport,
-    this.resume,
-    this.test,
-    this.tenMarksheet,
-    this.twelveMarksheet,
-    this.underGraduate,
-    this.postGraduate,
-  });
-  Data.fromJson(Map<String, dynamic> json) {
+
+  ProfileData(
+      {this.id,
+      this.userType,
+      this.entityStatus,
+      this.createdDate,
+      this.updatedDate,
+      this.personalDetail,
+      this.academicDetails,
+      this.workExperience,
+      this.testDetails,
+      this.file,
+      this.passport,
+      // this.resume,
+      this.test,
+      this.tenMarksheet,
+      this.twelveMarksheet,
+      // this.underGraduate,
+      this.postGraduate});
+
+  ProfileData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userType = json['userType'];
     entityStatus = json['entityStatus'];
-    createdDate = json['createdDate'].cast<int>();
+    createdDate = json['createdDate'];
     updatedDate = json['updatedDate'];
     personalDetail = json['personalDetail'] != null
         ? new PersonalDetail.fromJson(json['personalDetail'])
@@ -131,6 +134,7 @@ class Data {
       });
     }
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -142,9 +146,8 @@ class Data {
       data['personalDetail'] = this.personalDetail!.toJson();
     }
     if (this.academicDetails != null) {
-      data['academicDetails'] = this.academicDetails!
-          .map((v) => v.toJson())
-          .toList();
+      data['academicDetails'] =
+          this.academicDetails!.map((v) => v.toJson()).toList();
     }
     if (this.workExperience != null) {
       data['workExperience'] = this.workExperience!.toJson();
@@ -166,14 +169,12 @@ class Data {
       data['tenMarksheet'] = this.tenMarksheet!.map((v) => v.toJson()).toList();
     }
     if (this.twelveMarksheet != null) {
-      data['twelveMarksheet'] = this.twelveMarksheet!
-          .map((v) => v.toJson())
-          .toList();
+      data['twelveMarksheet'] =
+          this.twelveMarksheet!.map((v) => v.toJson()).toList();
     }
     // if (this.underGraduate != null) {
-    //   data['underGraduate'] = this.underGraduate!
-    //       .map((v) => v.toJson())
-    //       .toList();
+    //   data['underGraduate'] =
+    //       this.underGraduate!.map((v) => v.toJson()).toList();
     // }
     if (this.postGraduate != null) {
       data['postGraduate'] = this.postGraduate!.map((v) => v.toJson()).toList();
@@ -189,7 +190,7 @@ class PersonalDetail {
   String? lastName;
   String? email;
   String? mobile;
-  List? dob;
+  List ? dob;
   String? maritalStatus;
   bool? isPasswordResetRequired;
   MailingAddress? mailingAddress;
@@ -199,24 +200,25 @@ class PersonalDetail {
   BackgroundInfo? backgroundInfo;
   dynamic additionalInformation;
   ImportantContact? importantContact;
-  PersonalDetail({
-    this.id,
-    this.firstName,
-    this.middleName,
-    this.lastName,
-    this.email,
-    this.mobile,
-    this.dob,
-    this.maritalStatus,
-    this.isPasswordResetRequired,
-    this.mailingAddress,
-    this.permanentAddress,
-    this.passportInfo,
-    this.nationalityInfo,
-    this.backgroundInfo,
-    this.additionalInformation,
-    this.importantContact,
-  });
+
+  PersonalDetail(
+      {this.id,
+      this.firstName,
+      this.middleName,
+      this.lastName,
+      this.email,
+      this.mobile,
+      this.dob,
+      this.maritalStatus,
+      this.isPasswordResetRequired,
+      this.mailingAddress,
+      this.permanentAddress,
+      this.passportInfo,
+      this.nationalityInfo,
+      this.backgroundInfo,
+      this.additionalInformation,
+      this.importantContact});
+
   PersonalDetail.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     firstName = json['firstName'];
@@ -224,7 +226,7 @@ class PersonalDetail {
     lastName = json['lastName'];
     email = json['email'];
     mobile = json['mobile'];
-    dob = json['dob'].cast<int>();
+    dob = json['dob'];
     maritalStatus = json['maritalStatus'];
     isPasswordResetRequired = json['isPasswordResetRequired'];
     mailingAddress = json['mailingAddress'] != null
@@ -247,6 +249,7 @@ class PersonalDetail {
         ? new ImportantContact.fromJson(json['importantContact'])
         : null;
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -283,7 +286,7 @@ class PersonalDetail {
 
 class MailingAddress {
   num? id;
-  List? createdDate;
+  List ? createdDate;
   dynamic updatedDate;
   String? entityStatus;
   String? address1;
@@ -292,21 +295,22 @@ class MailingAddress {
   String? state;
   String? city;
   String? postcode;
-  MailingAddress({
-    this.id,
-    this.createdDate,
-    this.updatedDate,
-    this.entityStatus,
-    this.address1,
-    this.address2,
-    this.country,
-    this.state,
-    this.city,
-    this.postcode,
-  });
+
+  MailingAddress(
+      {this.id,
+      this.createdDate,
+      this.updatedDate,
+      this.entityStatus,
+      this.address1,
+      this.address2,
+      this.country,
+      this.state,
+      this.city,
+      this.postcode});
+
   MailingAddress.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    createdDate = json['createdDate'].cast<int>();
+    createdDate = json['createdDate'];
     updatedDate = json['updatedDate'];
     entityStatus = json['entityStatus'];
     address1 = json['address1'];
@@ -316,6 +320,7 @@ class MailingAddress {
     city = json['city'];
     postcode = json['postcode'];
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -334,39 +339,41 @@ class MailingAddress {
 
 class PassportInfo {
   num? id;
-  List? createdDate;
+  List ? createdDate;
   dynamic updatedDate;
   String? entityStatus;
   String? passportNumber;
-  List? issueDate;
-  List? expiryDate;
+  List ? issueDate;
+  List ? expiryDate;
   String? issueCountry;
   String? birthCity;
   String? birthCountry;
-  PassportInfo({
-    this.id,
-    this.createdDate,
-    this.updatedDate,
-    this.entityStatus,
-    this.passportNumber,
-    this.issueDate,
-    this.expiryDate,
-    this.issueCountry,
-    this.birthCity,
-    this.birthCountry,
-  });
+
+  PassportInfo(
+      {this.id,
+      this.createdDate,
+      this.updatedDate,
+      this.entityStatus,
+      this.passportNumber,
+      this.issueDate,
+      this.expiryDate,
+      this.issueCountry,
+      this.birthCity,
+      this.birthCountry});
+
   PassportInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    createdDate = json['createdDate'].cast<int>();
+    createdDate = json['createdDate'];
     updatedDate = json['updatedDate'];
     entityStatus = json['entityStatus'];
     passportNumber = json['passportNumber'];
-    issueDate = json['issueDate'].cast<int>();
-    expiryDate = json['expiryDate'].cast<int>();
+    issueDate = json['issueDate'];
+    expiryDate = json['expiryDate'];
     issueCountry = json['issueCountry'];
     birthCity = json['birthCity'];
     birthCountry = json['birthCountry'];
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -385,7 +392,7 @@ class PassportInfo {
 
 class NationalityInfo {
   num? id;
-  List? createdDate;
+  List ? createdDate;
   dynamic updatedDate;
   String? entityStatus;
   String? nationality;
@@ -394,21 +401,22 @@ class NationalityInfo {
   bool? isLivingOtherCountry;
   String? otherNationality;
   String? otherCountry;
-  NationalityInfo({
-    this.id,
-    this.createdDate,
-    this.updatedDate,
-    this.entityStatus,
-    this.nationality,
-    this.citizenship,
-    this.isMoreNationality,
-    this.isLivingOtherCountry,
-    this.otherNationality,
-    this.otherCountry,
-  });
+
+  NationalityInfo(
+      {this.id,
+      this.createdDate,
+      this.updatedDate,
+      this.entityStatus,
+      this.nationality,
+      this.citizenship,
+      this.isMoreNationality,
+      this.isLivingOtherCountry,
+      this.otherNationality,
+      this.otherCountry});
+
   NationalityInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    createdDate = json['createdDate'].cast<int>();
+    createdDate = json['createdDate'];
     updatedDate = json['updatedDate'];
     entityStatus = json['entityStatus'];
     nationality = json['nationality'];
@@ -418,6 +426,7 @@ class NationalityInfo {
     otherNationality = json['otherNationality'];
     otherCountry = json['otherCountry'];
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -436,7 +445,7 @@ class NationalityInfo {
 
 class BackgroundInfo {
   num? id;
-  List? createdDate;
+  List ? createdDate;
   dynamic updatedDate;
   String? entityStatus;
   bool? hasImmigrationHistory;
@@ -448,24 +457,25 @@ class BackgroundInfo {
   String? visaName;
   bool? hasCriminalRecord;
   String? criminalRecordDetail;
-  BackgroundInfo({
-    this.id,
-    this.createdDate,
-    this.updatedDate,
-    this.entityStatus,
-    this.hasImmigrationHistory,
-    this.immigrationCountry,
-    this.hasMedicalIssue,
-    this.medicalIssueDetail,
-    this.hasVisaRefusal,
-    this.visaRefusalDetail,
-    this.visaName,
-    this.hasCriminalRecord,
-    this.criminalRecordDetail,
-  });
+
+  BackgroundInfo(
+      {this.id,
+      this.createdDate,
+      this.updatedDate,
+      this.entityStatus,
+      this.hasImmigrationHistory,
+      this.immigrationCountry,
+      this.hasMedicalIssue,
+      this.medicalIssueDetail,
+      this.hasVisaRefusal,
+      this.visaRefusalDetail,
+      this.visaName,
+      this.hasCriminalRecord,
+      this.criminalRecordDetail});
+
   BackgroundInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    createdDate = json['createdDate'].cast<int>();
+    createdDate = json['createdDate'];
     updatedDate = json['updatedDate'];
     entityStatus = json['entityStatus'];
     hasImmigrationHistory = json['hasImmigrationHistory'];
@@ -478,6 +488,7 @@ class BackgroundInfo {
     hasCriminalRecord = json['hasCriminalRecord'];
     criminalRecordDetail = json['criminalRecordDetail'];
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -499,26 +510,27 @@ class BackgroundInfo {
 
 class ImportantContact {
   num? id;
-  List? createdDate;
+  List ? createdDate;
   dynamic updatedDate;
   String? entityStatus;
   String? name;
   String? phone;
   String? email;
   String? relationShip;
-  ImportantContact({
-    this.id,
-    this.createdDate,
-    this.updatedDate,
-    this.entityStatus,
-    this.name,
-    this.phone,
-    this.email,
-    this.relationShip,
-  });
+
+  ImportantContact(
+      {this.id,
+      this.createdDate,
+      this.updatedDate,
+      this.entityStatus,
+      this.name,
+      this.phone,
+      this.email,
+      this.relationShip});
+
   ImportantContact.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    createdDate = json['createdDate'].cast<int>();
+    createdDate = json['createdDate'];
     updatedDate = json['updatedDate'];
     entityStatus = json['entityStatus'];
     name = json['name'];
@@ -526,6 +538,7 @@ class ImportantContact {
     email = json['email'];
     relationShip = json['relationShip'];
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -542,6 +555,8 @@ class ImportantContact {
 
 class AcademicDetails {
   num? id;
+  List ? createdDate;
+  dynamic updatedDate;
   String? entityStatus;
   String? countryOfEducation;
   String? stateOfStudy;
@@ -552,27 +567,32 @@ class AcademicDetails {
   String? gradingSystem;
   String? score;
   String? primaryLanguage;
-  List? startDate;
+  List ? startDate;
   dynamic endDate;
   String? academicType;
-  AcademicDetails({
-    this.id,
-    this.entityStatus,
-    this.countryOfEducation,
-    this.stateOfStudy,
-    this.levelOfStudy,
-    this.universityName,
-    this.qualificationAchieved,
-    this.cityOfStudy,
-    this.gradingSystem,
-    this.score,
-    this.primaryLanguage,
-    this.startDate,
-    this.endDate,
-    this.academicType,
-  });
+
+  AcademicDetails(
+      {this.id,
+      this.createdDate,
+      this.updatedDate,
+      this.entityStatus,
+      this.countryOfEducation,
+      this.stateOfStudy,
+      this.levelOfStudy,
+      this.universityName,
+      this.qualificationAchieved,
+      this.cityOfStudy,
+      this.gradingSystem,
+      this.score,
+      this.primaryLanguage,
+      this.startDate,
+      this.endDate,
+      this.academicType});
+
   AcademicDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    createdDate = json['createdDate'];
+    updatedDate = json['updatedDate'];
     entityStatus = json['entityStatus'];
     countryOfEducation = json['countryOfEducation'];
     stateOfStudy = json['stateOfStudy'];
@@ -583,13 +603,16 @@ class AcademicDetails {
     gradingSystem = json['gradingSystem'];
     score = json['score'];
     primaryLanguage = json['primaryLanguage'];
-    startDate = json['startDate'].cast<int>();
+    startDate = json['startDate'];
     endDate = json['endDate'];
     academicType = json['academicType'];
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
+    data['createdDate'] = this.createdDate;
+    data['updatedDate'] = this.updatedDate;
     data['entityStatus'] = this.entityStatus;
     data['countryOfEducation'] = this.countryOfEducation;
     data['stateOfStudy'] = this.stateOfStudy;
@@ -609,7 +632,7 @@ class AcademicDetails {
 
 class WorkExperience {
   num? id;
-  List? createdDate;
+  List ? createdDate;
   dynamic updatedDate;
   String? entityStatus;
   String? organizationName;
@@ -619,22 +642,23 @@ class WorkExperience {
   dynamic workingUpto;
   String? modeOfSalary;
   bool? isCurrentlyWorking;
-  WorkExperience({
-    this.id,
-    this.createdDate,
-    this.updatedDate,
-    this.entityStatus,
-    this.organizationName,
-    this.position,
-    this.jobProfile,
-    this.workingFrom,
-    this.workingUpto,
-    this.modeOfSalary,
-    this.isCurrentlyWorking,
-  });
+
+  WorkExperience(
+      {this.id,
+      this.createdDate,
+      this.updatedDate,
+      this.entityStatus,
+      this.organizationName,
+      this.position,
+      this.jobProfile,
+      this.workingFrom,
+      this.workingUpto,
+      this.modeOfSalary,
+      this.isCurrentlyWorking});
+
   WorkExperience.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    createdDate = json['createdDate'].cast<int>();
+    createdDate = json['createdDate'];
     updatedDate = json['updatedDate'];
     entityStatus = json['entityStatus'];
     organizationName = json['organizationName'];
@@ -645,6 +669,7 @@ class WorkExperience {
     modeOfSalary = json['modeOfSalary'];
     isCurrentlyWorking = json['isCurrentlyWorking'];
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -664,10 +689,10 @@ class WorkExperience {
 
 class TestDetails {
   num? id;
-  List? createdDate;
+  List ? createdDate;
   dynamic updatedDate;
   String? entityStatus;
-  num? overallScore;
+  dynamic overallScore;
   dynamic examDate;
   num? quantitative;
   num? verbal;
@@ -688,36 +713,37 @@ class TestDetails {
   dynamic essay;
   dynamic science;
   dynamic english;
-  TestDetails({
-    this.id,
-    this.createdDate,
-    this.updatedDate,
-    this.entityStatus,
-    this.overallScore,
-    this.examDate,
-    this.quantitative,
-    this.verbal,
-    this.analyticWriting,
-    this.integratedReasoning,
-    this.testType,
-    this.listening,
-    this.reading,
-    this.speaking,
-    this.writing,
-    this.isResultReceivable,
-    this.resultDate,
-    this.hasWaiver,
-    this.englishMarks12th,
-    this.mediumOfInstruction,
-    this.readingAndWriting,
-    this.math,
-    this.essay,
-    this.science,
-    this.english,
-  });
+
+  TestDetails(
+      {this.id,
+      this.createdDate,
+      this.updatedDate,
+      this.entityStatus,
+      this.overallScore,
+      this.examDate,
+      this.quantitative,
+      this.verbal,
+      this.analyticWriting,
+      this.integratedReasoning,
+      this.testType,
+      this.listening,
+      this.reading,
+      this.speaking,
+      this.writing,
+      this.isResultReceivable,
+      this.resultDate,
+      this.hasWaiver,
+      this.englishMarks12th,
+      this.mediumOfInstruction,
+      this.readingAndWriting,
+      this.math,
+      this.essay,
+      this.science,
+      this.english});
+
   TestDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    createdDate = json['createdDate'].cast<int>();
+    createdDate = json['createdDate'];
     updatedDate = json['updatedDate'];
     entityStatus = json['entityStatus'];
     overallScore = json['overallScore'];
@@ -742,6 +768,7 @@ class TestDetails {
     science = json['science'];
     english = json['english'];
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -780,14 +807,15 @@ class File {
   String? uniqueName;
   String? fileType;
   String? uploadType;
-  File({
-    this.id,
-    this.path,
-    this.fileName,
-    this.uniqueName,
-    this.fileType,
-    this.uploadType,
-  });
+
+  File(
+      {this.id,
+      this.path,
+      this.fileName,
+      this.uniqueName,
+      this.fileType,
+      this.uploadType});
+
   File.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     path = json['path'];
@@ -796,6 +824,7 @@ class File {
     fileType = json['fileType'];
     uploadType = json['uploadType'];
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -807,6 +836,7 @@ class File {
     return data;
   }
 }
+
 
 class PostGraduate {
   num? id;
@@ -826,12 +856,12 @@ class PostGraduate {
   });
 
   factory PostGraduate.fromJson(Map<String, dynamic> json) => PostGraduate(
-    id: json['id'] as num?,
-    path: json['path'] as String?,
-    fileName: json['fileName'] as String?,
-    uniqueName: json['uniqueName'] as String?,
-    fileType: json['fileType'] as String?,
-    uploadType: json['uploadType'] as String?,
+    id: json['id'],
+    path: json['path'],
+    fileName: json['fileName'],
+    uniqueName: json['uniqueName'],
+    fileType: json['fileType'],
+    uploadType: json['uploadType'],
   );
 
   Map<String, dynamic> toJson() => {
@@ -862,12 +892,12 @@ class Passport {
   });
 
   factory Passport.fromJson(Map<String, dynamic> json) => Passport(
-    id: json['id'] as num?,
-    path: json['path'] as String?,
-    fileName: json['fileName'] as String?,
-    uniqueName: json['uniqueName'] as String?,
-    fileType: json['fileType'] as String?,
-    uploadType: json['uploadType'] as String?,
+    id: json['id'],
+    path: json['path'],
+    fileName: json['fileName'],
+    uniqueName: json['uniqueName'],
+    fileType: json['fileType'],
+    uploadType: json['uploadType'],
   );
 
   Map<String, dynamic> toJson() => {
@@ -898,12 +928,12 @@ class TenMarksheet {
   });
 
   factory TenMarksheet.fromJson(Map<String, dynamic> json) => TenMarksheet(
-    id: json['id'] as num?,
-    path: json['path'] as String?,
-    fileName: json['fileName'] as String?,
-    uniqueName: json['uniqueName'] as String?,
-    fileType: json['fileType'] as String?,
-    uploadType: json['uploadType'] as String?,
+    id: json['id'],
+    path: json['path'],
+    fileName: json['fileName'],
+    uniqueName: json['uniqueName'],
+    fileType: json['fileType'],
+    uploadType: json['uploadType'],
   );
 
   Map<String, dynamic> toJson() => {
@@ -935,12 +965,12 @@ class TwelveMarksheet {
 
   factory TwelveMarksheet.fromJson(Map<String, dynamic> json) =>
       TwelveMarksheet(
-        id: json['id'] as num?,
-        path: json['path'] as String?,
-        fileName: json['fileName'] as String?,
-        uniqueName: json['uniqueName'] as String?,
-        fileType: json['fileType'] as String?,
-        uploadType: json['uploadType'] as String?,
+        id: json['id'],
+        path: json['path'],
+        fileName: json['fileName'],
+        uniqueName: json['uniqueName'],
+        fileType: json['fileType'],
+        uploadType: json['uploadType'],
       );
 
   Map<String, dynamic> toJson() => {

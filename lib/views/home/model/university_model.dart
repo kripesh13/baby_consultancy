@@ -1,9 +1,9 @@
 class UniversityModel {
-  int? httpStatus;
+  num ? httpStatus;
   String? message;
   List<UniversityData>? data;
-  int? pageSize;
-  int? totalItems;
+  num ? pageSize;
+  num ? totalItems;
 
   UniversityModel(
       {this.httpStatus,
@@ -39,19 +39,19 @@ class UniversityModel {
 }
 
 class UniversityData {
-  int? id;
+  num ? id;
   String? programName;
   String? concentration;
   String? applicationDeadLine;
   String? studyLevel;
   String? duration;
   String? openIntakes;
-  int? intakeYear;
+  num ? intakeYear;
   String? entryRequirement;
-  double? ieltsScore;
-  int? toeflScore;
-  int? pteScore;
-  int? detScore;
+  dynamic ieltsScore;
+  num ? toeflScore;
+  num ? pteScore;
+  num ? detScore;
   String? applicationFee;
   String? yearlytutionfees;
   String? scholarShipDetail;
@@ -59,7 +59,7 @@ class UniversityData {
   String? remarks;
   dynamic es;
   String? applicationMode;
-  int? universityId;
+  num ? universityId;
   String? universityName;
   String? country;
   String? universityRanking;

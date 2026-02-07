@@ -2,6 +2,7 @@ import 'package:baby_eduction/const/app_fonts.dart';
 import 'package:baby_eduction/const/asset_path.dart';
 import 'package:baby_eduction/const/color_schemas.dart';
 import 'package:baby_eduction/const/design_constant.dart';
+import 'package:baby_eduction/views/document/student_documents_page.dart';
 import 'package:baby_eduction/views/home/home_screen.dart';
 import 'package:baby_eduction/views/profile/profile_screen.dart';
 import 'package:baby_eduction/views/student/student_screen.dart';
@@ -20,7 +21,7 @@ class NavBarScreen extends ConsumerWidget {
 
   final List<Widget> pages = [
     HomeScreen(),
-    StudentScreen(),
+    StudentDocumentsPage(),
     UniversityScreen(),
     ProfileScreen(),
   ];
