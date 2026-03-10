@@ -26,7 +26,7 @@ class HomeState extends ChangeNotifier {
       // notifyListeners();
       loading(visible: true);
 
-      final response = await ref.read(homeRepo).getUniversity();
+      final response = await ref.read(homeRepo).getUniversity(limit: 20);
       universityModel = response;
       notifyListeners();
     } catch (e, s) {

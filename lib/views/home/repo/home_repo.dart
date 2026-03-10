@@ -3,32 +3,26 @@ import 'package:baby_eduction/network/api_service.dart';
 import 'package:baby_eduction/views/home/model/university_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
-
 final homeRepo = Provider<HomeRepo>((ref) {
   return HomeRepo();
 });
 
 class HomeRepo {
-  
-    final ApiService _apiService = ApiService();
+  final ApiService _apiService = ApiService();
 
-Future<UniversityModel> getUniversity({
-  int page = 0,
-  int limit = 10,
-}) async {
-  try {
-    final response = await _apiService.get(
-      "${Endpoints.university}&page=$page&limit=$limit",
-    );
+  Future<UniversityModel> getUniversity({
+    int page = 0,
+    int limit = 50,
+  }) async {
+    try {
+      final response = await _apiService.get(
+        // "${Endpoints.university}&page=$page&limit=$limit",
+        Endpoints.university,
+      );
 
-    return UniversityModel.fromJson(response.data);
-  } catch (e) {
-    rethrow;
+      return UniversityModel.fromJson(response.data);
+    } catch (e) {
+      rethrow;
+    }
   }
-}
-
- 
-
-
 }

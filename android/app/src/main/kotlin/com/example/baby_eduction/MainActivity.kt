@@ -1,4 +1,4 @@
-package com.example.baby_eduction
+package com.nepionics_tech.baby_eduction
 
 import io.flutter.embedding.android.FlutterActivity
 

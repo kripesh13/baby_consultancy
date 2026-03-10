@@ -24,13 +24,18 @@ class AppBarWidget extends StatelessWidget {
                   child: const Icon(Icons.menu, color: Colors.white, size: 26),
                 ),
                 Stack(
-                  children: const [
-                    Icon(
-                      Icons.notifications_none,
-                      color: Colors.white,
-                      size: 26,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                         CustomNavigator.push(context, RouteNames.notification);
+                      },
+                      child: const Icon(
+                        Icons.notifications_none,
+                        color: Colors.white,
+                        size: 26,
+                      ),
                     ),
-                    Positioned(
+                    const Positioned(
                       right: 0,
                       top: 0,
                       child: CircleAvatar(

@@ -4,6 +4,8 @@ class RouteNames {
   static const String otpVerifyScreen = "/otpVerifyScreen";
   static const String changePassword = "/changePassword";
   static const String secureDocumentPage = "/secureDocumentPage";
+  static const String notification = "/notification";
+
 
 
   static const String navBraScreen = "/navBraScreenScreen";

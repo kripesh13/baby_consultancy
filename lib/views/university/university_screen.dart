@@ -28,28 +28,30 @@ class UniversityScreen extends ConsumerWidget {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: state.universityModel?.data?.length ?? 0,
-
                 itemBuilder: (context, index) {
                   final data = state.universityModel?.data?[index];
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Text(
-                          data?.programName ?? "",
-                          style: kkBoldTextStyle().copyWith(),
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            data?.programName ?? "",
+                            style: kkBoldTextStyle().copyWith(),
+                          ),
                         ),
-                      ),
-                      heightBox(10),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        child: UniversityCard(data: data),
-                      ),
-                    ],
+                        heightBox(10),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.w),
+                          child: UniversityCard(data: data),
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),
-
               SizedBox(height: 20.h),
             ],
           ),
@@ -67,6 +69,7 @@ class UniversityCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [_TopBannerCard(), heightBox(16), _DetailsCard(data!)],
     );
   }
@@ -149,6 +152,7 @@ class _DetailsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         _infoRow(Icons.school_outlined, data.universityName ?? ""),
         _infoRow(
@@ -184,6 +188,7 @@ class _DetailsSection extends StatelessWidget {
         ),
         SizedBox(height: 20.h),
         _rankingRow(),
+        SizedBox(height: 20.h),
       ],
     );
   }

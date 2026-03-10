@@ -21,7 +21,7 @@ class NavBarScreen extends ConsumerWidget {
 
   final List<Widget> pages = [
     HomeScreen(),
-    StudentDocumentsPage(),
+    StudentScreen(),
     UniversityScreen(),
     ProfileScreen(),
   ];

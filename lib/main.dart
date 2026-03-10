@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:baby_eduction/const/app_theme.dart';
 import 'package:baby_eduction/const/design_constant.dart';
+import 'package:baby_eduction/firebase_options.dart';
 import 'package:baby_eduction/network/notification_service.dart';
 import 'package:baby_eduction/routes/app_router.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -11,38 +10,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-
-    FirebaseMessaging.onBackgroundMessage(
-    firebaseMessagingBackgroundHandler,
-  );
-
-
-  runApp(
-    ProviderScope(
-      child: MyApp(),
-    ),
-  );
-}
-
-
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-
-  try {
-    if (message.notification != null) {
-      print(message.notification!.body);
-    }
-  } catch (e) {
-    print('Error handling background message: $e');
-  }
+  await NotificationServices.showBackgroundNotification(message);
 }
 
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
+  runApp(const ProviderScope(child: MyApp()));
+}
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -55,24 +39,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      NotificationServices.instance.setupAll(
-        context: context,
-        onNotificationTap: (payload) {
-          if (payload != null) {
-            final data = jsonDecode(payload);
-            debugPrint('Notification tapped: $data');
-
-            // Example navigation
-            // navigatorKey.currentState?.pushNamed('/details');
-          }
-        },
-        onTokenRefresh: (token) {
-          debugPrint('New FCM Token: $token');
-          // send token to backend
-        },
-      );
-    });
+    NotificationServices.instance.initialize(context);
   }
 
   @override
@@ -84,7 +51,6 @@ class _MyAppState extends State<MyApp> {
       builder: (context, child) {
         return MaterialApp.router(
           title: 'Baby Education',
-          // showPerformanceOverlay: true,
           debugShowCheckedModeBanner: false,
           builder: BotToastInit(),
           routerConfig: AppRouter.router,

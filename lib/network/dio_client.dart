@@ -1,4 +1,7 @@
+import 'package:baby_eduction/main.dart';
+import 'package:baby_eduction/routes/route_names.dart';
 import 'package:baby_eduction/storage/storage_key.dart';
+import 'package:baby_eduction/utils/custom_navigator.dart';
 import 'package:dio/dio.dart';
 import '../storage/secure_storage_service.dart';
 
@@ -43,8 +46,14 @@ class DioClient {
           print('✅ RESPONSE [${response.statusCode}] => ${response.data}');
           handler.next(response);
         },
-        onError: (DioException e, handler) {
+        onError: (DioException e, handler) async {
           print('❌ ERROR [${e.response?.statusCode}] => ${e.response?.data}');
+
+          if (e.response?.statusCode == 401) {
+            await SecureStorageService().delete(key: StorageKeys.token);
+                    
+                CustomNavigator.pushReplace(navigatorKey.currentState!.context, RouteNames.loginScreen);
+          }
           handler.next(e);
         },
       ),

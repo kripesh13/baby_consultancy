@@ -1,16 +1,16 @@
+import 'dart:io';
+
 import 'package:baby_eduction/const/app_fonts.dart';
 import 'package:baby_eduction/const/color_schemas.dart';
+import 'package:baby_eduction/views/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 
 final documentImagesProvider = StateProvider.family<List<XFile>, String>(
   (ref, docType) => [],
 );
-
-final uploadProgressProvider = StateProvider<int>((ref) => 0);
 
 class DocumentUploadScreen extends ConsumerWidget {
   const DocumentUploadScreen({super.key});
@@ -18,13 +18,11 @@ class DocumentUploadScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final allDocs = [
-      'see',
-      'slc',
-      'bachelor',
-      'noc',
-      'passport',
-      'citizenship',
+      'Ward_Document',
+      'Land_Document',
+      'Family_Citizenship_Document',
     ];
+
     int uploadedCount = 0;
     for (var doc in allDocs) {
       if (ref.watch(documentImagesProvider(doc)).isNotEmpty) {
@@ -51,6 +49,24 @@ class DocumentUploadScreen extends ConsumerWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              // Collect uploadedFiles metadata (titles and types) from your backend or state
+              // For demonstration, sending empty list here, replace with actual
+              final uploadedFiles = <UploadedFile>[];
+              
+              await ref.read(profileProvider).uploadDocuments(
+                ref: ref,
+                uploadedFiles: uploadedFiles,
+              );
+            },
+            child: const Text(
+              'Upload',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -99,8 +115,7 @@ class DocumentUploadScreen extends ConsumerWidget {
                       ),
                     ),
                     Positioned(
-                      left:
-                          (MediaQuery.of(context).size.width - 40) *
+                      left: (MediaQuery.of(context).size.width - 40) *
                               (uploadedCount / totalDocuments) -
                           10,
                       top: -4,
@@ -141,24 +156,16 @@ class DocumentUploadScreen extends ConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: ListView(
-                  children: [
-                    DocumentCard(title: 'SEE Certificate', docType: 'see'),
-                    const SizedBox(height: 12),
-                    DocumentCard(title: 'SLC (+2) Certificate', docType: 'slc'),
-                    const SizedBox(height: 12),
+                  children: const [
+                    DocumentCard(title: 'Ward Document', docType: 'Ward_Document'),
+                    SizedBox(height: 12),
+                    DocumentCard(title: 'Land Document', docType: 'Land_Document'),
+                    SizedBox(height: 12),
                     DocumentCard(
-                      title: 'Bachelor Certificate',
-                      docType: 'bachelor',
+                      title: 'Family_Citizenship_Document',
+                      docType: 'Family_Citizenship_Document',
                     ),
-                    const SizedBox(height: 12),
-                    DocumentCard(title: 'NOC Certificate', docType: 'noc'),
-                    const SizedBox(height: 12),
-                    DocumentCard(title: 'Passport Copy', docType: 'passport'),
-                    const SizedBox(height: 12),
-                    DocumentCard(
-                      title: 'Citizenship Certificate',
-                      docType: 'citizenship',
-                    ),
+                    SizedBox(height: 12),
                   ],
                 ),
               ),
@@ -236,7 +243,6 @@ class DocumentCard extends ConsumerWidget {
     updatedImages.removeAt(index);
     ref.read(documentImagesProvider(docType).notifier).state = updatedImages;
 
-    // If no images left, pop the screen
     if (updatedImages.isEmpty) {
       Navigator.pop(context);
     }
@@ -288,10 +294,10 @@ class DocumentCard extends ConsumerWidget {
                     padding: const EdgeInsets.all(16),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 12,
-                        ),
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                    ),
                     itemCount: images.length,
                     itemBuilder: (context, index) {
                       return Stack(
@@ -384,7 +390,6 @@ class DocumentCard extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(width: 16),
-                    // Document Title
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -408,7 +413,6 @@ class DocumentCard extends ConsumerWidget {
                         ],
                       ),
                     ),
-                    // Status Icon
                     if (isUploaded)
                       IconButton(
                         icon: const Icon(

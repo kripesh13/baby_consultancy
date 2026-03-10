@@ -2,6 +2,7 @@ import 'package:baby_eduction/const/endpoints.dart';
 import 'package:baby_eduction/network/api_service.dart';
 import 'package:baby_eduction/views/profile/model/profile_model.dart';
 import 'package:baby_eduction/views/profile/model/student_document_model.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart';
 
@@ -20,9 +21,23 @@ class ProfileRepo {
 
   Future<StudentDocumentModel> getDocument({studentId}) async {
     try {
-      var response = await _apiService.get("${Endpoints.studentDocument}$studentId");
+      var response =
+          await _apiService.get("${Endpoints.studentDocument}$studentId");
 
       return StudentDocumentModel.fromJson(response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  uploadDocuments({required FormData formData}) async {
+    try {
+      var response = await _apiService.post(
+        Endpoints.uploadDocument,
+        data: formData,
+        options: Options(contentType: 'multipart/form-data'),
+      );
+      return response.data;
     } catch (e) {
       rethrow;
     }

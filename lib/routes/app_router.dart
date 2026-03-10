@@ -5,6 +5,7 @@ import 'package:baby_eduction/views/document/document_status.dart';
 import 'package:baby_eduction/views/document/secure_document_page.dart';
 import 'package:baby_eduction/views/document/student_documents_page.dart';
 import 'package:baby_eduction/views/nav_bar/nav_bar_screen.dart';
+import 'package:baby_eduction/views/notification/notification_screen.dart';
 import 'package:baby_eduction/views/splash/splash_screen.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
@@ -70,6 +71,14 @@ class AppRouter {
         path: RouteNames.documentStatusScreen,
         pageBuilder: (context, state) => CustomTransitionPage(
           child: DocumentStatusScreen(),
+          transitionsBuilder: transitionsBuilder,
+        ),
+      ),
+
+      GoRoute(
+        path: RouteNames.notification,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          child: NotificationScreen(),
           transitionsBuilder: transitionsBuilder,
         ),
       ),

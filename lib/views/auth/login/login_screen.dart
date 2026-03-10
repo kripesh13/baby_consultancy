@@ -103,25 +103,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
                   heightBox(16.h),
 
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: rememberMe,
-                        activeColor: AppColors.primaryColor,
-                        onChanged: (v) {
-                          setState(() => rememberMe = v!);
-                        },
-                      ),
-                      Text("Remember me", style: kTextStyle()),
-                      const Spacer(),
-                      Text(
-                        "Forget password",
-                        style: kBoldTextStyle().copyWith(
-                          color: AppColors.primaryColor,
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Checkbox(
+                  //       value: rememberMe,
+                  //       activeColor: AppColors.primaryColor,
+                  //       onChanged: (v) {
+                  //         setState(() => rememberMe = v!);
+                  //       },
+                  //     ),
+                  //     Text("Remember me", style: kTextStyle()),
+                  //     const Spacer(),
+                  //     Text(
+                  //       "Forget password",
+                  //       style: kBoldTextStyle().copyWith(
+                  //         color: AppColors.primaryColor,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
 
                   heightBox(20.h),
 
